@@ -1,8 +1,9 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+
+const routes = require('./routes');
 const app = express();
 const port = 5000;
-
 
 app.use('/static', express.static('public'));
 app.engine('hbs', handlebars.engine({
@@ -10,8 +11,7 @@ app.engine('hbs', handlebars.engine({
 }));
 app.set('view engine', 'hbs');
 app.set('views', './src/views')
-app.get('/', (req, res) => {
-    res.render('index');
-});
+
+app.use(routes);
 
 app.listen(port, () => console.log(`App is working on port ${port}...`));
