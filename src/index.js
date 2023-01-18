@@ -1,6 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
-
+const config = require('../config/config')
 const routes = require('./routes');
 const app = express();
 const port = 5000;
@@ -16,4 +16,4 @@ app.set('views', './src/views')
 
 app.use(routes);
 
-app.listen(port, () => console.log(`App is working on port ${port}...`));
+app.listen(config.PORT, () => console.log(`App is working on port ${config.PORT}...`));
