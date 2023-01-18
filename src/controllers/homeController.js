@@ -1,7 +1,12 @@
-exports.index = (req, res) => {
-    res.render('index');
-}
+const router = require('express').Router();
+const cubes = require('../../config/database.json');
 
-exports.about = (req, res) => {
+router.get('/', (req, res) => {
+    res.render('index', {cubes});
+});
+
+router.get('/about', (req, res) => {
     res.render('about');
-}
+});
+
+module.exports = router;
