@@ -24,7 +24,7 @@ router.get('/details', (req, res) => {
     if(!cube){
         return res.redirect('/404');  
     }
-console.log("Get details ............")
+
     res.render('details', { cube });
 })  
 
