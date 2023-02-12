@@ -14,19 +14,17 @@ router.post('/create', (req, res) => {
     res.redirect('/');
 });
 
-router.get('/details/:cubeId', (req, res) => {
+router.get('/details', (req, res) => {
     let cubeId = Number(req.params.cubeId);
-   
     if(!cubeId){
         return res.redirect('/404');   
     }
 
     let cube = db.cubes.find(x => x.id === cubeId);
-    
     if(!cube){
         return res.redirect('/404');  
     }
-
+console.log("Get details ............")
     res.render('details', { cube });
 })  
 

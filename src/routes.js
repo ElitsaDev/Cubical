@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.use('/', homeController);
 router.use('/cube', cubeController);
+router.use('/details/:cubeId', cubeController);
 router.use('/404', homeController);
 
 module.exports = router;
