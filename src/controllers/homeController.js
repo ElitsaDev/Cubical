@@ -3,22 +3,7 @@ const db = require('../database.json');
 const fs = require('fs/promises');
 
 router.get('/', (req, res) => {
-    const { search, from, to } = req.query;
-    let cubes = db.cubes;
-
-    if(search){
-        cubes = cubes.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
-    }
-
-    if(from){
-        cubes = cubes.filter(cube => cube.difficultyLevel >= from);
-    }
-
-    if(to){
-        cubes = cubes.filter(cube => cube.difficultyLevel <= to);
-    }
-
-    res.render('index', {cubes, search, from, to});
+    res.render('index', {cubes: db.cubes});
 });
 
 router.get('/about', (req, res) => {
@@ -41,6 +26,6 @@ router.post('/create', (req, res) => {
 
 router.get('/404', (req, res) => {
     res.render('404');
-});
+})
 
 module.exports = router;
