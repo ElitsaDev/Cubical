@@ -21,3 +21,6 @@ const cubeSchema = new Schema({
         min: 1,
     }
 });
+
+const Cube = model('Cube', cubeSchema);
+module.exports = Cube;
