@@ -2,8 +2,26 @@ const router = require('express').Router();
 const db = require('../database.json');
 const fs = require('fs/promises');
 
-router.get('/', (req, res) => {
-    res.render('index', {cubes: db.cubes});
+const Cube = require('../models/Cube');
+
+router.get('/', async(req, res) => {
+    const { search, from, to } = req.query;
+    let cubes = await Cube.find().lean();
+
+    //Use DB filtration instead of in memory filter
+    if(search){
+        cubes = cubes.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+    }
+
+    if(from){
+        cubes = cubes.filter(cube => cube.difficultyLevel >= from);
+    }
+
+    if(to){
+        cubes = cubes.filter(cube => cube.difficultyLevel <= to);
+    }
+
+    res.render('index', {cubes, search, from, to});
 });
 
 router.get('/about', (req, res) => {

@@ -6,10 +6,10 @@ router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
     const {name, description, imageUrl, difficultyLevel} = req.body;
-    let cube = new Cube(name, description, imageUrl, difficultyLevel);
-    cube.save();
+    let cube = new Cube({name, description, imageUrl, difficultyLevel});
+    await cube.save();
     
     res.redirect('/');
 });
